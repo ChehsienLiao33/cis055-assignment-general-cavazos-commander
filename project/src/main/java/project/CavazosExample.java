@@ -38,11 +38,15 @@ public class CavazosExample {
           System.out.print("How many commands do you want to generate? ");
           int num = Integer.parseInt(scan.nextLine());
 
+          // generate an array of random commands
           String[] issuedCommands = randomCommand(commandArray, num);
 
+          // once new commands are issued, previous redo history is no longer valid
           undoneHistory.clear();
 
           System.out.println("Issued Commands:");
+
+          // print each generated command and add it to history
           for (int i = 0; i < issuedCommands.length; i++) {
             System.out.println(issuedCommands[i]);
             history.add(issuedCommands[i]);
