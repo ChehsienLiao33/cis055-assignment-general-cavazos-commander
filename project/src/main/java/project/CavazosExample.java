@@ -61,7 +61,13 @@ public class CavazosExample {
           }
           break;
         case 'r':
-          System.out.println("Redo not implemented yet.");
+          if (undoneHistory.size() > 0) {
+            String redoneCommand = undoneHistory.remove(undoneHistory.size() - 1);
+            history.add(redoneCommand);
+            System.out.println("Redid Command: " + redoneCommand);
+          } else {
+            System.out.println("No command to redo.");
+          }
           break;
         default:
           System.out.println("Invalid command.");
