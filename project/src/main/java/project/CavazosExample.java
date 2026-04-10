@@ -12,15 +12,42 @@ public class CavazosExample {
     // read coammands
     JSONArray commandJSONArray = JSONFile.readArray(fileName);
     String[] commandArray = getCommandArray(commandJSONArray);
-    System.out.println(commandArray);
 
-    // print list of all commands
-    System.out.println("----- List of all commands -----");
-    print(commandArray);
+    Scanner scan = new Scanner(System.in);
+    char command;
 
-    System.out.println(
-        "----- Issuing 5 random commands from General Cavazos -----");
-    randomCommand(commandArray, 5);
+    while (true) {
+      printMenu();
+
+      System.out.print("Enter a command: ");
+      command = scan.nextLine().toLowerCase().charAt(0);
+
+      if (command == 'q') {
+        System.out.println("Quitting application...");
+        break;
+      }
+
+      switch (command) {
+        case 'i':
+          System.out.println("Issue command not implemented yet.");
+          break;
+        case 'l':
+          System.out.println("List commands not implemented yet.");
+          break;
+        case 'u':
+          System.out.println("Undo not implemented yet.");
+          break;
+        case 'r':
+          System.out.println("Redo not implemented yet.");
+          break;
+        default:
+          System.out.println("Invalid command.");
+      }
+
+      System.out.println();
+    }
+
+    scan.close();
   }
 
   // randomly issue commands from General Cavazos
