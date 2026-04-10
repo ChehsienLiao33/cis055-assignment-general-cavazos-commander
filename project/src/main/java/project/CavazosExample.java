@@ -1,10 +1,14 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import org.json.simple.*;
 
 public class CavazosExample {
+
+  public static ArrayList<String> history = new ArrayList<String>();
+  public static ArrayList<String> undoneHistory = new ArrayList<String>();
 
   public static void main(String[] args) {
     String fileName = "/Users/youjia/Documents/GitHub/cis055-assignment-general-cavazos-commander/project/target/classes/project/commands.json";
@@ -29,7 +33,19 @@ public class CavazosExample {
 
       switch (command) {
         case 'i':
-          System.out.println("Issue command not implemented yet.");
+          System.out.print("How many commands do you want to generate? ");
+          int num = Integer.parseInt(scan.nextLine());
+
+          String[] issuedCommands = randomCommand(commandArray, num);
+
+          undoneHistory.clear();
+
+          System.out.println("Issued Commands:");
+          for (int i = 0; i < issuedCommands.length; i++) {
+            System.out.println(issuedCommands[i]);
+            history.add(issuedCommands[i]);
+          }
+
           break;
         case 'l':
           System.out.println("----- List of all commands -----");
@@ -52,14 +68,16 @@ public class CavazosExample {
   }
 
   // randomly issue commands from General Cavazos
-  public static void randomCommand(String[] commandArray, int numCommand) {
+  public static String[] randomCommand(String[] commandArray, int numCommand) {
     Random rand = new Random();
-    System.out.printf("Number\tCommand\n");
-    System.out.printf("------\t---------------\n");
+    String[] result = new String[numCommand];
+
     for (int i = 0; i < numCommand; i++) {
       int randIndex = rand.nextInt(commandArray.length);
-      System.out.printf("%04d\t%s\n", i, commandArray[randIndex]);
+      result[i] = commandArray[randIndex];
     }
+
+    return result;
   }
 
   // print command array
