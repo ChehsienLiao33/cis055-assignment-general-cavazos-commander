@@ -7,7 +7,9 @@ import org.json.simple.*;
 
 public class CavazosExample {
 
+  // history stores all commands that have been issued
   public static ArrayList<String> history = new ArrayList<String>();
+  // undoneHistory stores commands that were undone
   public static ArrayList<String> undoneHistory = new ArrayList<String>();
 
   public static void main(String[] args) {
