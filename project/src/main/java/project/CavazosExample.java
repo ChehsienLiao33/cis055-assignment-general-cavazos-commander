@@ -32,7 +32,8 @@ public class CavazosExample {
           System.out.println("Issue command not implemented yet.");
           break;
         case 'l':
-          System.out.println("List commands not implemented yet.");
+          System.out.println("----- List of all commands -----");
+          print(commandArray);
           break;
         case 'u':
           System.out.println("Undo not implemented yet.");
