@@ -58,6 +58,7 @@ public class CavazosExample {
           print(commandArray);
           break;
         case 'u':
+          // check if there is at least one command to undo
           if (history.size() > 0) {
             String undoneCommand = history.remove(history.size() - 1);
             undoneHistory.add(undoneCommand);
