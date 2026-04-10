@@ -90,10 +90,15 @@ public class CavazosExample {
   // randomly issue commands from General Cavazos
   public static String[] randomCommand(String[] commandArray, int numCommand) {
     Random rand = new Random();
+
+    // result array to store generated commands
     String[] result = new String[numCommand];
 
+    // randomly select commands from commandArray
     for (int i = 0; i < numCommand; i++) {
       int randIndex = rand.nextInt(commandArray.length);
+
+      // store selected command into result array
       result[i] = commandArray[randIndex];
     }
 
