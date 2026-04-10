@@ -52,7 +52,13 @@ public class CavazosExample {
           print(commandArray);
           break;
         case 'u':
-          System.out.println("Undo not implemented yet.");
+          if (history.size() > 0) {
+            String undoneCommand = history.remove(history.size() - 1);
+            undoneHistory.add(undoneCommand);
+            System.out.println("Undid Command: " + undoneCommand);
+          } else {
+            System.out.println("No command to undo.");
+          }
           break;
         case 'r':
           System.out.println("Redo not implemented yet.");
