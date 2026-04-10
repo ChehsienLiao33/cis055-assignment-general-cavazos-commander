@@ -68,6 +68,7 @@ public class CavazosExample {
           }
           break;
         case 'r':
+          // check if there is a command available to redo
           if (undoneHistory.size() > 0) {
             String redoneCommand = undoneHistory.remove(undoneHistory.size() - 1);
             history.add(redoneCommand);
