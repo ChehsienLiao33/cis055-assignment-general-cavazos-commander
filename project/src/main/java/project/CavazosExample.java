@@ -9,37 +9,34 @@ public class CavazosExample {
 
   // history stores all commands that have been issued
   public static ArrayList<String> history = new ArrayList<String>();
+
   // undoneHistory stores commands that were undone
   public static ArrayList<String> undoneHistory = new ArrayList<String>();
 
   public static void main(String[] args) {
     String fileName = "/Users/youjia/Documents/GitHub/cis055-assignment-general-cavazos-commander/project/target/classes/project/commands.json";
 
-    // read coammands
-    JSONArray commandJSONArray = JSONFile.readArray(fileName);
-    String[] commandArray = getCommandArray(commandJSONArray);
+    // read commands
+    JSONArray commandJsonArray = JSONFile.readArray(fileName);
+    String[] commandArray = getCommandArray(commandJsonArray);
 
     Scanner scan = new Scanner(System.in);
     char command;
+    boolean userQuit = false;
 
-    while (true) {
+    while (!userQuit) {
       printMenu();
 
       System.out.print("Enter a command: ");
       command = scan.nextLine().toLowerCase().charAt(0);
 
-      if (command == 'q') {
-        System.out.println("Quitting application...");
-        break;
-      }
-
       switch (command) {
         case 'i':
           System.out.print("How many commands do you want to generate? ");
-          int num = Integer.parseInt(scan.nextLine());
+          int numCommands = Integer.parseInt(scan.nextLine());
 
           // generate an array of random commands
-          String[] issuedCommands = randomCommand(commandArray, num);
+          String[] issuedCommands = randomCommand(commandArray, numCommands);
 
           // once new commands are issued, previous redo history is no longer valid
           undoneHistory.clear();
@@ -51,12 +48,13 @@ public class CavazosExample {
             System.out.println(issuedCommands[i]);
             history.add(issuedCommands[i]);
           }
-
           break;
+
         case 'l':
           System.out.println("----- List of all commands -----");
           print(commandArray);
           break;
+
         case 'u':
           // check if there is at least one command to undo
           if (history.size() > 0) {
@@ -67,6 +65,7 @@ public class CavazosExample {
             System.out.println("No command to undo.");
           }
           break;
+
         case 'r':
           // check if there is a command available to redo
           if (undoneHistory.size() > 0) {
@@ -77,6 +76,12 @@ public class CavazosExample {
             System.out.println("No command to redo.");
           }
           break;
+
+        case 'q':
+          System.out.println("Quitting application...");
+          userQuit = true;
+          break;
+
         default:
           System.out.println("Invalid command.");
       }
@@ -88,17 +93,15 @@ public class CavazosExample {
   }
 
   // randomly issue commands from General Cavazos
-  public static String[] randomCommand(String[] commandArray, int numCommand) {
+  public static String[] randomCommand(String[] commandArray, int numCommands) {
     Random rand = new Random();
 
-    // result array to store generated commands
-    String[] result = new String[numCommand];
+    // result array stores the generated commands
+    String[] result = new String[numCommands];
 
     // randomly select commands from commandArray
-    for (int i = 0; i < numCommand; i++) {
+    for (int i = 0; i < numCommands; i++) {
       int randIndex = rand.nextInt(commandArray.length);
-
-      // store selected command into result array
       result[i] = commandArray[randIndex];
     }
 
@@ -118,11 +121,12 @@ public class CavazosExample {
   public static String[] getCommandArray(JSONArray commandArray) {
     String[] arr = new String[commandArray.size()];
 
-    // get names from json object
+    // get names from json array
     for (int i = 0; i < commandArray.size(); i++) {
       String command = commandArray.get(i).toString();
       arr[i] = command;
     }
+
     return arr;
   }
 
